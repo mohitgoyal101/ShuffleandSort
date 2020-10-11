@@ -1,0 +1,312 @@
+<html>
+	<head>
+		<title>Shuffle and Sort</title>
+		<script type="text/javascript">
+			var cards = [
+							{	
+								"id": 1,
+								"text": "1",
+								"colorcode": "#6F98A8"
+							},
+							{	
+								"id": 2,
+								"text": "2",
+								"colorcode": "#2B8EAD"
+							},
+							{	
+								"id": 3,
+								"text": "3",
+								"colorcode": "#2F454E"
+							},
+							{	
+								"id": 4,
+								"text": "4",
+								"colorcode": "#2B8EAD"
+							},
+							{	
+								"id": 5,
+								"text": "5",
+								"colorcode": "#2F454E"
+							},
+							{	
+								"id": 6,
+								"text": "6",
+								"colorcode": "#BFBFBF"
+							},
+							{	
+								"id": 7,
+								"text": "7",
+								"colorcode": "#BFBFBF"
+							},
+							{	
+								"id": 8,
+								"text": "8",
+								"colorcode": "#6F98A8"
+							},
+							{	
+								"id": 9,
+								"text": "9",
+								"colorcode": "#2F454E"
+							},
+							
+						]
+			
+			function onbrowserresize()
+			{
+				var screenwidth = window.innerWidth;				
+				var container = document.getElementById("div-leftpanel-container");
+				container.innerHTML = '';
+				cards.forEach(function (carditem) {
+					var divitem = document.createElement("DIV");
+					divitem.classList.add("div-leftpanel-child");
+					divitem.innerHTML = '<span>' + carditem.text + '</span>';
+					if(screenwidth > 500)
+					{
+						divitem.style.backgroundColor = carditem.colorcode;
+					}
+					else
+					{
+						divitem.style.backgroundColor = "#EFEFEF";
+						divitem.style.borderLeft = "7px solid " + carditem.colorcode;
+					}
+					container.appendChild(divitem);
+				});
+				
+			}
+			
+			function onload()
+			{
+				this.onbrowserresize();
+			}
+
+			function onShuffleClick()
+			{
+				var indexCurrent = cards.length;
+				var tempValue;
+				var indexRandom;
+				while(indexCurrent !== 0)
+				{
+					indexRandom = Math.floor(Math.random() * indexCurrent);
+					indexCurrent -= 1;
+					tempValue = cards[indexCurrent];
+					cards[indexCurrent] = cards[indexRandom];
+					cards[indexRandom] = tempValue;
+				}
+				this.onbrowserresize();
+			}
+			
+			function onSortClick()
+			{
+				cards.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0));
+				this.onbrowserresize();
+			}
+		
+		</script>
+		
+		<style>
+			.div-title
+			{
+				font-weight: bold;
+				width: 100%;
+				text-align: center;
+				min-height: 4%;
+			}
+			.div-line
+			{
+				width: 100%;
+				background-color: #BFBFBF;
+				min-height: 1%;
+			}
+			.div-container
+			{
+				width: 100%;
+				background-color: #EFEFEF;
+				min-height: 95%;
+			}
+			.div-leftpanel
+			{
+				width: 70%;
+				float: right;
+			}
+			.div-rightpanel
+			{
+				width: 30%;
+				float: right;
+				text-align: center;
+			}
+			.div-leftpanel-container
+			{
+				width: 99%;
+			}
+			.div-leftpanel-child
+			{
+				float: left;
+				width: 33%;
+				min-height: 25%;
+				color: #FFFFFF;
+				text-align: center;
+				position: relative;
+			}
+			.div-leftpanel-child span
+			{
+				position: absolute;
+				top: 33%;
+				margin-top: -13px;
+				font-size: 60px;
+				margin-left: -15px;
+			}
+			.div-copyrighttext
+			{
+				width: 100%;
+				text-align: center;
+				position: relative;
+				top: 15px;
+				font-size: 12px;
+				font-style: italic;
+			}
+			.div-btnshuffle
+			{
+				margin-top: 30px;
+				float: left;
+				width: 70%
+			}
+			.div-btnsort
+			{
+				margin-top: 25px;
+				float: left;
+				width: 70%
+			}
+			.btn-shuffle
+			{
+				background-color: #72C3DC;
+				padding: 10px 15px;
+				font-size: 11px;
+				text-align: center;
+				cursor: pointer;
+				outline: none;
+				color: #FFFFFF;
+				border: none;
+				border-radius: 8px;
+				box-shadow: 0 5px #2B8EAD;
+				min-width: 50%;
+			}
+			.btn-sort
+			{
+				background-color: #72C3DC;
+				padding: 10px 15px;
+				font-size: 11px;
+				text-align: center;
+				cursor: pointer;
+				outline: none;
+				color: #FFFFFF;
+				border: none;
+				border-radius: 8px;
+				box-shadow: 0 5px #2B8EAD;
+				min-width: 50%;
+			}
+			
+			@media screen and (max-width: 500px) 
+			{
+				body
+				{
+					border: 5px solid black;
+					border-radius: 5px;
+				}
+				.div-title
+				{
+					font-weight: bold;
+					width: 100%;
+					text-align: center;
+					min-height: 5%;
+					color: #FFFFFF;
+					background-color: #333333;
+					padding-top: 10px;
+				}
+				.div-line
+				{
+					width: 100%;
+					background-color: #FFFFFF;
+					min-height: 1%;
+				}
+				.div-container
+				{
+					width: 100%;
+					background-color: #FFFFFF;
+					min-height: auto;
+				}
+				.div-leftpanel
+				{
+					width: 100%;
+					margin-top: 15px;
+				}
+				.div-rightpanel
+				{
+					width: 100%;
+					text-align: center;
+				}
+				.div-btnshuffle
+				{
+					float: left;
+					width: 48%;
+					text-align: right;
+					padding-right: 5px;
+					margin-top: 0px;
+				}
+				.div-btnsort
+				{
+					margin-top: 0px;
+					float: left;
+					width: 48%;
+					text-align: left;
+					padding-left: 5px;
+				}
+				.div-leftpanel-container
+				{
+					width: 92%;
+					padding-left: 3%;
+				}
+				.div-leftpanel-child
+				{
+					width: 100%;
+					min-height: 5%;
+					color: #000000;
+					text-align: center;
+					margin-bottom: 5px;
+				}
+				.div-leftpanel-child span
+				{
+					margin: auto;
+					font-size: 12px;
+					font-weight: bold;
+				}
+			}
+			
+		</style>
+		
+	</head>
+	
+	<body onload="onload();" onresize="onbrowserresize()">
+		<div class="div-title">Shuffle and Sort</div>
+		<div class="div-line"></div>
+		<div class="div-container">			
+			<div class="div-rightpanel">
+			<div class="div-btnshuffle">
+				<button class="btn-shuffle" onclick="onShuffleClick()">SHUFFLE</button>
+			</div>
+			<div class="div-btnsort">
+				<button class="btn-sort" onclick="onSortClick()">SORT</button>
+			</div>
+				
+			</div>
+			
+			<div class="div-leftpanel">
+				<div id="div-leftpanel-container" class="div-leftpanel-container"></div>			
+			</div>
+			
+			<div style="clear: both;"></div>
+			
+			<div class="div-copyrighttext">Shuffle and sort by Mohit Goyal</div>			
+		</div>
+	</body>
+	
+</html>
